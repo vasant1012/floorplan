@@ -14,7 +14,7 @@ Images will be displayed as below:
 
 **User will make ractangle on the room type to extract the area of the same and click on respective area button.**
 
-![image](https://user-images.githubusercontent.com/52622703/173567232-9cf59d5f-02c3-4a9e-bf6d-12eb7b2a15ec.png)
+![image](https://user-images.githubusercontent.com/52622703/173580261-643325df-9f7f-41e4-a452-25583492c849.png)
 
 Buttons are as follows:
 
