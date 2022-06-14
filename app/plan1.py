@@ -33,7 +33,6 @@ layout = dbc.Container([
     html.Div(id='output-image-upload_p1'),
 ])
 
-
 def parse_contents(contents):
     contents = str(contents[0])
     encoded_data = contents.split(',')[1]
@@ -50,20 +49,18 @@ def update_output(list_of_contents):
         children = [parse_contents(c) for c in zip(list_of_contents)]
         return children
 
-
 if path.exists("img_1.jpg"):
-    img = io.imread("img_1.jpg")
+    img_1 = io.imread("img_1.jpg")
 else:
     time.sleep(2)
-    img = np.zeros((512,512,3), np.uint8)
+    img_1 = np.full((500, 500, 3), 255, dtype = np.uint8)
 
-fig = px.imshow(img)
-fig.update_layout(dragmode="drawrect")
-
+fig_1 = px.imshow(img_1)
+fig_1.update_layout(dragmode="drawrect")
 
 # Build App
 annot_layout = html.Div([
-    dcc.Graph(id="fig", figure=fig),
+    dcc.Graph(id="fig_1", figure=fig_1),
     dbc.Container([
         html.Br(),
         dbc.Row([
@@ -111,9 +108,9 @@ annot_layout = html.Div([
                 html.Br(),
                 html.Label('Kitchen : Click and Select'),
                 html.Br(),
-                dbc.Card(id="card_5", body=True),
+                dbc.Card(id="card_5_p1", body=True),
                 dbc.Button("Click",
-                           id="btn_5",
+                           id="btn_5_p1",
                            outline=True,
                            color="primary",
                            className="me-1"),
@@ -135,29 +132,28 @@ annot_layout = html.Div([
 
 @app.callback(Output('card_1_p1', 'children'),
               Input('btn_1_p1', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_1", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_2_p1', 'children'),
               Input('btn_2_p1', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_1", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_3_p1', 'children'),
               Input('btn_3_p1', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_1", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_4_p1', 'children'),
               Input('btn_4_p1', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_1", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_5_p1', 'children'),
               Input('btn_5_p1', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_1", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_6_p1', 'children'),
               Input('btn_6_p1', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_1", "relayoutData"),
               prevent_initial_call=True)
-
 def button(btn, relayout_data):
     if btn > 0 and relayout_data == {'autosize': True}:
         return "Please draw a rectangle on image and click."
@@ -171,7 +167,7 @@ def button(btn, relayout_data):
                 for i in data:
                     keys, values = list(i.keys()), list(i.values())
                     cord = dict(zip(keys[-4:], values[-4:]))
-                cropped_image = img[int(cord.get("y0")):int(cord.get("y1")),
+                cropped_image = img_1[int(cord.get("y0")):int(cord.get("y1")),
                                     int(cord.get("x0")):int(cord.get("x1"))]
                 lst = ocr.img_to_str(cropped_image)
                 final = ocr.summary(lst)
@@ -180,7 +176,7 @@ def button(btn, relayout_data):
                             className="card-title"),
                     html.P([
                         f"Dimensions of Room - Length - {final[0]} ft & Breath - {final[1]} ft",
-                        html.Br(), f"Area of the Room  - {final[3]}"
+                        html.Br(), f"Area of the Room  - {final[3]} sq.ft."
                     ],
                         className="card-text")
                 ])

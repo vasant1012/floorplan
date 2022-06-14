@@ -50,17 +50,17 @@ def update_output(list_of_contents):
         return children
 
 if path.exists("img_2.jpg"):
-    img = io.imread("img_2.jpg")
+    img_2 = io.imread("img_2.jpg")
 else:
     time.sleep(2)
-    img = np.zeros((512,512,3), np.uint8)
+    img_2 = np.full((500, 500, 3), 255, dtype = np.uint8)
 
-fig = px.imshow(img)
-fig.update_layout(dragmode="drawrect")
+fig_2 = px.imshow(img_2)
+fig_2.update_layout(dragmode="drawrect")
 
 # Build App
 annot_layout = html.Div([
-    dcc.Graph(id="fig", figure=fig),
+    dcc.Graph(id="fig_2", figure=fig_2),
     dbc.Container([
         html.Br(),
         dbc.Row([
@@ -132,27 +132,27 @@ annot_layout = html.Div([
 
 @app.callback(Output('card_1_p2', 'children'),
               Input('btn_1_p2', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_2", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_2_p2', 'children'),
               Input('btn_2_p2', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_2", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_3_p2', 'children'),
               Input('btn_3_p2', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_2", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_4_p2', 'children'),
               Input('btn_4_p2', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_2", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_5_p2', 'children'),
               Input('btn_5_p2', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_2", "relayoutData"),
               prevent_initial_call=True)
 @app.callback(Output('card_6_p2', 'children'),
               Input('btn_6_p2', 'n_clicks'),
-              State("fig", "relayoutData"),
+              State("fig_2", "relayoutData"),
               prevent_initial_call=True)
 def button(btn, relayout_data):
     if btn > 0 and relayout_data == {'autosize': True}:
@@ -167,7 +167,7 @@ def button(btn, relayout_data):
                 for i in data:
                     keys, values = list(i.keys()), list(i.values())
                     cord = dict(zip(keys[-4:], values[-4:]))
-                cropped_image = img[int(cord.get("y0")):int(cord.get("y1")),
+                cropped_image = img_2[int(cord.get("y0")):int(cord.get("y1")),
                                     int(cord.get("x0")):int(cord.get("x1"))]
                 lst = ocr.img_to_str(cropped_image)
                 final = ocr.summary(lst)
@@ -176,7 +176,7 @@ def button(btn, relayout_data):
                             className="card-title"),
                     html.P([
                         f"Dimensions of Room - Length - {final[0]} ft & Breath - {final[1]} ft",
-                        html.Br(), f"Area of the Room  - {final[3]}"
+                        html.Br(), f"Area of the Room  - {final[3]} sq.ft."
                     ],
                         className="card-text")
                 ])
