@@ -1,17 +1,13 @@
 from dash import html
 import dash_bootstrap_components as dbc
-import pathlib
 import warnings
-from os import path, remove
 from app import plan1, plan2
 warnings.filterwarnings('ignore')
 
+import pathlib
 
 PATH = pathlib.Path(__file__).parent
-if path.exists("img_2.jpg"):
-    remove("img_2.jpg")
-elif path.exists("img_1.jpg"):
-    remove("img_1.jpg")
+
 
 layout = html.Div([html.H3('2 BHK', style={'textAlign': 'center'}),
             dbc.Row([
