@@ -14,8 +14,8 @@ Finally, after we get complete information click on the "Summary" button to gene
 ![UI4](https://github.com/vasant1012/floorplan/assets/52622703/a11c23e8-b0df-4f04-ae24-e0f43e01eea0)
 
 ## Tech Stack Involved
-- *Google Vision API*: to get information from floorplan images uploaded by the user in the User interface in terms of OCR and post-process result into a Table that has room, dimension, and area.
-- *U-net-based CV model*: Deep learning model that predicts the area in terms of pixels. Then it will be mapped with generated data from API and get the quadrants-wise area of uploaded plans.
-- *Plotly Dash UI*: The user interface is a medium to map the generated data from API and model prediction output for final summary generation.
+- **Google Vision API**: to get information from floorplan images uploaded by the user in the User interface in terms of OCR and post-process result into a Table that has room, dimension, and area.
+- **U-net-based CV model**: Deep learning model that predicts the area in terms of pixels. Then it will be mapped with generated data from API and get the quadrants-wise area of uploaded plans.
+- **Plotly Dash UI**: The user interface is a medium to map the generated data from API and model prediction output for final summary generation.
 
 *This is the base version. 1.0*
