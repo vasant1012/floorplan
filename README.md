@@ -1,23 +1,21 @@
 # Floor PLan Use Case
-To detect and retrieve area from provided image using pytessaract and dash UI.
+## Objective:
+To detect and retrieve area from the provided image using Google Vision API and u-net-based computer vision model. The user uploads two floor-plan(images) to compare in the user interface as below:
 
-We have used pytessaract which can detect the text from broundry boxes provided by User. Then that information will be displayed in Dash UI
-The information contains the length, breath, type of room and area of the room.
- 
-This is main interface where user upload two different images of floor plan. 
 
-![image](https://user-images.githubusercontent.com/52622703/173566756-f22db187-fbf9-4d20-975e-e38da6b55f88.png)
 
-Images will be displayed as below:
+## Getting Started
+Both plans will be sent to API to get ocr result and post-processing of the result will provide the final table which has features, dimensions and its respective areas.
 
-![image](https://user-images.githubusercontent.com/52622703/173567001-d3cfefc9-ec17-4c89-8d32-7f6d1b601ae5.png)
 
-**User will make ractangle on the room type to extract the area of the same and click on respective area button.**
+Also Simultaneously it will send to deep learning model to predict quadrant-wise area. The model takes the image, breaks it into 4 quadrants, and predicts multiple classes as features of the floorplan. Those classes will be mapped to features generated from api and also area is calculated using pixel information from the image. It will displayed as:
 
-![image](https://user-images.githubusercontent.com/52622703/173567232-9cf59d5f-02c3-4a9e-bf6d-12eb7b2a15ec.png)
 
-Buttons are as follows:
+Finally, after we get complete information click on the "Summary" button to generate a summary based on area. The summary also has a conclusion that compares feature-wise area and suggests the best floorplan to the user.
 
-![image](https://user-images.githubusercontent.com/52622703/173567370-662e5a97-425b-4926-8cf7-7636e42c0e71.png)
+## Tech Stack Involved
+- *Google Vision API*: to get information from floorplan images uploaded by the user in the User interface in terms of OCR and post-process result into a Table that has room, dimension, and area.
+- *U-net-based CV model*: Deep learning model that predicts the area in terms of pixels. Then it will be mapped with generated data from API and get the quadrants-wise area of uploaded plans.
+- *Plotly Dash UI*: The user interface is a medium to map the generated data from API and model prediction output for final summary generation.
 
-*This is base version. 1.0*
+*This is the base version. 1.0*
