@@ -8,7 +8,7 @@ dash==2.9.3
 dash-bootstrap-components==1.0.0
 dash-core-components==2.0.0
 dash-html-components==2.0.0
-gunicorn==20.1.0
+gunicorn==22.0.0
 numpy==1.22.4
 opencv-python-headless==4.5.4.60
 imutils==0.5.4
